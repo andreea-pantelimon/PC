@@ -30,7 +30,7 @@ int main(int argc,char** argv){
             }
         }
 
-        printf("[%s] Sendig payload %s\n", argv[0], t.payload);
+        printf("[%s] Sending payload %s\n", argv[0], t.payload);
         send_message(&t);
     }
 
