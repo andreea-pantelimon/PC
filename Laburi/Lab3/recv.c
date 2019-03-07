@@ -23,7 +23,7 @@ int main(int argc,char** argv){
     printf("[%s] Got msg with payload: %s\n", argv[0], r.payload);
 
     for (int i = 0; i < r.len; ++i) {
-        for (int j = 0; j < 7; ++j) {
+        for (int j = 0; j < 8; ++j) {
             check_bit ^= (1 << j) & r.payload[i];
         }
     }
