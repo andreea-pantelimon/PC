@@ -13,25 +13,36 @@
 int main(int argc,char** argv){
     init(HOST,PORT);
     msg t;
-    int file_desc, size, chunk_size;
+    pkt p;
+    int file_desc, chunk_size;
 
-    memset(t.payload, 0, MAX_LEN);
     file_desc = open(argv[1], O_RDONLY);
-    chunk_size = read(file_desc, t.payload, MAX_LEN - 2);
+
+    for (int i = 0; i < 20; ++i) {
+        lseek(file_desc, 0, SEEK_SET);
+        memset(t.payload, 0, MAX_LEN);
+        chunk_size = read(file_desc, p.payload, 1395);
     
-    if (chunk_size < 0) {
-        perror("Unable to read from input file\n");
-    } else {
-        t.len = chunk_size;
+        if (chunk_size < 0) {
+            perror("Unable to read from input file\n");
+        } else {
+            t.len = chunk_size;
+            p.parity = 0;
 
-        for (int i = 0; i < chunk_size; ++i) {
-            for (int j = 0; j < 8; ++j) {
-                t.payload[MAX_LEN - 1] ^= (1 << j) & t.payload[i];
+            for (int i = 0; i < chunk_size; ++i) {
+                for (int j = 0; j < 8; ++j) {
+                    p.parity ^= (1 << j) & p.payload[i];
+                }
             }
-        }
+            memcpy(t.payload, p.payload, MAX_LEN);
 
-        printf("[%s] Sending payload %s\n", argv[0], t.payload);
-        send_message(&t);
+            printf("[%s] Sending payload: %s\n", argv[0], t.payload);
+
+            send_message(&t);
+            recv_message(&t);
+
+            printf("[%s] Recieved response: %s\n", argv[0], t.payload);
+        }
     }
 
     close(file_desc);

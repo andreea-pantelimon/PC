@@ -3,7 +3,7 @@
 SPEED=1
 DELAY=1
 LOSS=0
-CORRUPT=100
+CORRUPT=50
 
 {
     killall link
