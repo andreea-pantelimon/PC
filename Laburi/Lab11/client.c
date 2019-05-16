@@ -27,35 +27,35 @@ int main(int argc, char *argv[]) {
     /*
         Ex 1: Get videos
     */
-    sockfd = open_connection(IP_SERVER, PORT_SERVER, AF_INET, SOCK_STREAM, 0);
-    message = compute_get_request(IP_SERVER, "/videos", NULL);
-    send_to_server(sockfd, message);
-    printf("%s", message);
-    response = receive_from_server(sockfd);
-    printf("%s\n", response);
-    close_connection(sockfd);
+    // sockfd = open_connection(IP_SERVER, PORT_SERVER, AF_INET, SOCK_STREAM, 0);
+    // message = compute_get_request(IP_SERVER, "/videos", NULL);
+    // send_to_server(sockfd, message);
+    // printf("%s", message);
+    // response = receive_from_server(sockfd);
+    // printf("%s\n", response);
+    // close_connection(sockfd);
 
     /*
         EX 2.1: Add video
     */
-    sockfd = open_connection(IP_SERVER, PORT_SERVER, AF_INET, SOCK_STREAM, 0);
-    char *form_data = "id=-1&name=nope";
-    message = compute_post_request(argv[1], "/videos", form_data);
-    send_to_server(sockfd, message);
-    response = receive_from_server(sockfd);
-    printf("%s\n", response);
-    close_connection(sockfd);
+    // sockfd = open_connection(IP_SERVER, PORT_SERVER, AF_INET, SOCK_STREAM, 0);
+    // char *form_data = "id=-1&name=nope";
+    // message = compute_post_request(IP_SERVER, "/videos", form_data);
+    // send_to_server(sockfd, message);
+    // response = receive_from_server(sockfd);
+    // printf("%s\n", response);
+    // close_connection(sockfd);
 
     /*
         Ex 2.2 Verificam noua colectie de videoclipuri
     */ 
-    sockfd = open_connection(IP_SERVER, PORT_SERVER, AF_INET, SOCK_STREAM, 0);
-    message = compute_get_request(argv[1], "/videos", NULL);
-    send_to_server(sockfd, message);
-    printf("%s", message);
-    response = receive_from_server(sockfd);
-    printf("%s\n", response);
-    close_connection(sockfd);
+    // sockfd = open_connection(IP_SERVER, PORT_SERVER, AF_INET, SOCK_STREAM, 0);
+    // message = compute_get_request(IP_SERVER, "/videos", NULL);
+    // send_to_server(sockfd, message);
+    // printf("%s", message);
+    // response = receive_from_server(sockfd);
+    // printf("%s\n", response);
+    // close_connection(sockfd);
     
     /*
         Ex 3 Autentificare
@@ -63,18 +63,19 @@ int main(int argc, char *argv[]) {
     sockfd = open_connection(IP_SERVER, PORT_SERVER, AF_INET, SOCK_STREAM, 0);
     char *data = "username=admin&password=p@ss";
     message = compute_post_request(IP_SERVER, "/weather/login", data);
+    printf("%s\n", message);
     send_to_server(sockfd, message);
     response = receive_from_server(sockfd);
     printf("%s\n", response);
     close_connection(sockfd);
 
     // Bonus:
-    sockfd = open_connection(IP_SERVER, PORT_SERVER, AF_INET, SOCK_STREAM, 0);
-    message = compute_delete_request(IP_SERVER, "/videos");
-    send_to_server(sockfd, message);
-    response = receive_from_server(sockfd);
-    printf("%s\n", response);
-    close_connection(sockfd);
+    // sockfd = open_connection(IP_SERVER, PORT_SERVER, AF_INET, SOCK_STREAM, 0);
+    // message = compute_delete_request(IP_SERVER, "/videos");
+    // send_to_server(sockfd, message);
+    // response = receive_from_server(sockfd);
+    // printf("%s\n", response);
+    // close_connection(sockfd);
 
 
     free(message);
