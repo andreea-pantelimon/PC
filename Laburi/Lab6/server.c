@@ -20,7 +20,7 @@
 
 void usage(char*file)
 {
-    fprintf(stderr, "Usage: %s server_port file\n", file);
+    fprintf(stderr, "Usage: %s server_port\n", file);
     exit(0);
 }
 
@@ -29,7 +29,7 @@ void usage(char*file)
  */
 int main(int argc, char **argv)
 {
-    if (argc != 3)
+    if (argc != 2)
         usage(argv[0]);
 
     int fd, sock;
@@ -37,46 +37,30 @@ int main(int argc, char **argv)
     struct sockaddr_in from_station;
     char buf[BUFLEN];
     memset(buf, 0, BUFLEN);
-    // int ret;
 
-    /* TODO deschidere socket */
     sock = socket(PF_INET, SOCK_DGRAM, 0);
 
-    /* TODO setare struct sockaddr_in pentru a specifica unde trimit
-     * datele */
     from_station.sin_family = AF_INET;
     from_station.sin_port = htons(atoi(argv[1]));
     from_station.sin_addr.s_addr = INADDR_ANY;
 
-    /* TODO legare proprietăți de socket */
     bind(sock, (struct sockaddr *) &from_station, sizeof(struct sockaddr_in));
 
-    /* TODO deschidere fișier pentru scriere */
-    fd = open(argv[2], O_WRONLY | O_CREAT, 0644);
-
-    /*
-     * TODO
-     * cat_timp  mai_pot_citi
-     *		citeste din socket
-     *		pune in fisier
-     */
-    recvfrom(sock, buf, BUFLEN, 0, (struct sockaddr *) &from_station, &socklen)N�U;
-    printf("%s", buf);
+    recvfrom(sock, buf, BUFLEN, 0, (struct sockaddr *) &from_station, &socklen);
+    printf("%s\n", buf);
     fd = open(buf, O_WRONLY | O_CREAT, 0644);
     memset(buf, 0, BUFLEN);
+
     while (1) {
         recvfrom(sock, buf, BUFLEN, 0, (struct sockaddr *) &from_station, &socklen);
         if (strcmp(buf, "FINISH") == 0) {
             break;
         }
-        int copiat = write(fd, buf, strlen(buf));
+        write(fd, buf, strlen(buf));
         memset(buf, 0, BUFLEN);
     }
 
-    /* TODO închidere socket */
     close(sock);
-
-    /* TODO închidere fișier */
     close(fd);
 
     return 0;
