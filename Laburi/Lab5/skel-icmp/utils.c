@@ -30,7 +30,6 @@ char *dns_lookup(char *addr_host, struct sockaddr_in *addr_con) {
 	(*addr_con).sin_addr.s_addr  = *(long*)host_entity->h_addr;
 
 	return ip;
-
 }
 
 char* reverse_dns_lookup(char *ip_addr) {
@@ -46,6 +45,7 @@ char* reverse_dns_lookup(char *ip_addr) {
 				sizeof(buf), NULL, 0, NI_NAMEREQD)) {
 		return NULL;
 	}
+	
 	ret_buf = (char*)malloc((strlen(buf) +1)*sizeof(char) );
 	strcpy(ret_buf, buf);
 	return ret_buf;
