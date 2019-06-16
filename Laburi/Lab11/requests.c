@@ -9,8 +9,7 @@
 #include "helpers.h"
 #include "requests.h"
 
-char *compute_get_request(char *host, char *url, char *url_params)
-{
+char *compute_get_request(char *host, char *url, char *url_params) {
     char *message = calloc(BUFLEN, sizeof(char));
     char *line = calloc(LINELEN, sizeof(char));
     /*
@@ -32,12 +31,10 @@ char *compute_get_request(char *host, char *url, char *url_params)
     sprintf(line, "Host: %s", host);
     compute_message(message, line);
 
-    // TODO Ex 0
 
     /*
         PAS 3 (optional): Adaugam headere si/ sau cookies, respectand forma protocolului
     */
-    // TODO BONUS COOKIE
     sprintf(line, "Cookie: isLogged=true");
     compute_message(message, line);
     
@@ -47,29 +44,25 @@ char *compute_get_request(char *host, char *url, char *url_params)
     sprintf(line, "");
     compute_message(message, line);
     
-    //TODO Ex 0
     return message;
 }
+
 char *compute_post_request(char *host, char *url, char *form_data) {
 
     char *message = calloc(BUFLEN, sizeof(char));
     char *line = calloc(LINELEN, sizeof(char));
+    
     /*
         PAS 1: Scriem numele metodei, calea si tipul protocolului
     */
-
     sprintf(line, "POST %s HTTP/1.1", url);
     compute_message(message, line);
-
-    // TODO Ex 2
 
     /*
         PAS 2: Adaugam host-ul
     */
-
     sprintf(line, "Host: %s", host);
     compute_message(message, line);
-    // TODO Ex 2
 
     /*
         PAS 3: Adaugam headere si/ sau cookies, respectand forma protocolului
@@ -81,16 +74,11 @@ char *compute_post_request(char *host, char *url, char *form_data) {
     sprintf(line, "Content-Length: %ld", strlen(form_data));
     compute_message(message, line);
 
-    // TODO Ex 2
-
     /*
         PAS 4: Adaugam linia de final de antent
     */
     sprintf(line, "");
     compute_message(message, line);
-
-
-    // TODO Ex 2 
 
     /*
         PAS 5: Adaugam data
@@ -98,7 +86,6 @@ char *compute_post_request(char *host, char *url, char *form_data) {
     sprintf(line, "%s", form_data);
     compute_message(message, line);
 
-    // TODO Ex 2
     return message;
 }
 

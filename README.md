@@ -9,6 +9,20 @@ Protocoale de Comunicatie - UPB 2019
 
 - Lab 4: protocol de transfer *START - STOP* unidirectional cu fereastra glisanta
 
+- Lab 5: ICMP si dirijare de pachete
+
+- Lab 6: aplicatie client-server ce utilizeaza protocolul *UDP*
+
+- Lab 7: aplicatie client-server ce utilizeaza protocolul *TCP*
+
+- Lab 8: multiplexare peste *TCP*
+
+- Lab 9: *DNS*
+
+- Lab 10: email (*SMTP* si *POP3*)
+
+- Lab 11: *HTTP*
+
 ## Test
 
 - colocviu de laborator 2019: aplicatie client-server ce implementeaza algoritmul *Diffie-Hellman*
