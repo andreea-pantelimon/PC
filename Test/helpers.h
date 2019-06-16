@@ -1,5 +1,5 @@
 #ifndef _HELPERS_H
-#define _HELPERS_H 1
+#define _HELPERS_H
 
 #include <stdio.h>
 #include <stdlib.h>

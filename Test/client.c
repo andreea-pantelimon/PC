@@ -19,10 +19,12 @@ void usage(char *file) {
 
 int get_key (int n, int p) {
     int a = n, res = 1;
-    for(int i = 0; (1 << i) <= p; i++) {
-        if((1 << i) & p) {
+
+    for (int i = 0; (1 << i) <= p; ++i) {
+        if ((1 << i) & p) {
             res = (1LL * res * a) % N;
         }
+        
         a = (1LL * a * a) % N;
     }
 

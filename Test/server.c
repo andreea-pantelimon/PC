@@ -86,8 +86,6 @@ int main(int argc, char *argv[])
 							inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port), newsockfd);
 
 					// adauga-l in lista de clients
-//					clients[clients_num++] = newsockfd;
-
                     n = recv(newsockfd, buffer, sizeof(buffer), 0);
                     DIE(n < 0, "recv");
 
