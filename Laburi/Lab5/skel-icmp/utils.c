@@ -12,10 +12,9 @@
 
 #include "utils.h"
 
-char *dns_lookup(char *addr_host, struct sockaddr_in *addr_con)
-{
+char *dns_lookup(char *addr_host, struct sockaddr_in *addr_con) {
 	struct hostent *host_entity;
-	char *ip=(char*)malloc(NI_MAXHOST*sizeof(char));
+	char *ip = (char*)malloc(NI_MAXHOST*sizeof(char));
 	int i;
 
 	if ((host_entity = gethostbyname(addr_host)) == NULL) {
@@ -34,8 +33,7 @@ char *dns_lookup(char *addr_host, struct sockaddr_in *addr_con)
 
 }
 
-char* reverse_dns_lookup(char *ip_addr)
-{
+char* reverse_dns_lookup(char *ip_addr) {
 	struct sockaddr_in temp_addr;
 	socklen_t len;
 	char buf[NI_MAXHOST], *ret_buf;
@@ -54,8 +52,7 @@ char* reverse_dns_lookup(char *ip_addr)
 }
 
 unsigned short
-in_cksum(const unsigned short *addr, int len, unsigned short csum)
-{
+in_cksum(const unsigned short *addr, int len, unsigned short csum) {
 	int nleft = len;
 	const unsigned short *w = addr;
 	unsigned short answer;
@@ -83,5 +80,4 @@ in_cksum(const unsigned short *addr, int len, unsigned short csum)
 	sum += (sum >> 16);			/* add carry */
 	answer = ~sum;				/* truncate to 16 bits */
 	return (answer);
-
 }

@@ -14,8 +14,7 @@
 #include "utils.h"
 
 void send_icmp(int sock, struct sockaddr_in *whereto,
-	      struct icmphdr *header, struct icmp_response *response)
-{
+	      struct icmphdr *header, struct icmp_response *response) {
 	struct timespec start, end;
 
 	clock_gettime(CLOCK_MONOTONIC, &start);
@@ -63,8 +62,7 @@ int ping(int sock, struct sockaddr_in *whereto, int count) {
     }
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	int res;
 
 	if (argc != 3) {
@@ -88,8 +86,6 @@ int main(int argc, char **argv)
 
 	int count = atoi(argv[1]);
 	ping(sock, &whereto, count);
-
-	// ICMP_ECHO = 8
 
 	return 0;
 }
