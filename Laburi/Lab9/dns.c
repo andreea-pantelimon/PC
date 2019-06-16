@@ -11,30 +11,25 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 
-int usage(char* name)
-{
+int usage(char* name) {
 	printf("Usage:\n\t%s -n <NAME>\n\t%s -a <IP>\n", name, name);
 	return 1;
 }
 
 // Receives a name and prints IP addresses
-void get_ip(char* name)
-{
+void get_ip(char* name) {
 	int ret;
 	struct addrinfo hints, *result, *p;
 	memset (&hints, 0, sizeof(hints));
 
-	// TODO: set hints
     hints.ai_family = AF_UNSPEC;
 	hints.ai_protocol = IPPROTO_TCP;
 
-    // TODO: get addresses
 	ret = getaddrinfo(name, NULL, &hints, &result);
 	if (ret < 0) {
 		gai_strerror(ret);
 	}
 
-	// TODO: iterate through addresses and print them
 	for (p = result; p != NULL; p = p->ai_next) {
 		 if (p->ai_family == AF_INET) {
 		 	char ip[INET_ADDRSTRLEN];
@@ -52,32 +47,25 @@ void get_ip(char* name)
 		 }
 	}
 
-	// TODO: free allocated data
 	freeaddrinfo(result);
 }
 
 // Receives an address and prints the associated name and service
-void get_name(char* ip)
-{
+void get_name(char* ip) {
     struct sockaddr_in addr;
     char host[1024];
     char service[20];
 
-    // TODO: fill in address data
     addr.sin_family = AF_INET;
     addr.sin_port = htons (8080);
     inet_aton(ip, &addr.sin_addr);
 
-    // TODO: get name and service
     getnameinfo ((struct sockaddr *)&addr, sizeof(struct sockaddr_in), host, 1024, service, 20, 0);
 
-    // TODO: print name and service
     printf("Name: %s Service: %s\n", host, service);
-
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	if (argc < 3) {
 		return usage(argv[0]);
 	}
