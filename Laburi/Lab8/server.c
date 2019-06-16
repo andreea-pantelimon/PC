@@ -82,9 +82,9 @@ int main(int argc, char *argv[])
 					}
 
 					printf("Noua conexiune de la %s, port %d, socket client %d\n",
-							inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port), newsockfd);
+						   inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port), newsockfd);
 
-					// adauga-l in lista de clients
+					// adauga-l in lista de clienti
 					clients[clients_num++] = newsockfd;
 					sprintf(notify_others, "[UPDATE] New client: %d\n", newsockfd);
 					
@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
 					} else {
 						int dest = atoi(buffer);
 						send(dest, buffer + 2, strlen(buffer) - 2, 0);
-						printf ("S-a primit de la clientul de pe socketul %d mesajul: %s\n", i, buffer);
+						printf("S-a primit de la clientul de pe socketul %d mesajul: %s\n", i, buffer);
 					}
 				}
 			}
