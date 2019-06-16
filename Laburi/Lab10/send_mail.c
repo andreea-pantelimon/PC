@@ -77,10 +77,10 @@ void handle_smtp() {
 		exit(-1);
 	}
 
-	// TODO: completat informatii despre server-ul SMTP in variabila servaddr
 	inet_aton(SERVER_IP,&servaddr.sin_addr);
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(SMTP_PORT);
+	
 	// conectare la server-ul SMTP
 	if (connect(sockfd, (struct sockaddr *) &servaddr, sizeof(servaddr)) < 0 ) {
 		printf("Eroare la conectare\n");
@@ -92,35 +92,27 @@ void handle_smtp() {
 	DIE(n < 0, "read");
 	printf("Am primit: %s\n", recvbuf);
 
-	// trimis prima comanda la server
 	sprintf(sendbuf, "HELO Teo");
 	send_command(sockfd, sendbuf, "250");
 
-	// TODO: trimis cerere de log in si citit raspuns
 	sprintf(sendbuf, "AUTH LOGIN");
 	send_command(sockfd, sendbuf, "334");
         
-	// TODO: trimis nume utilizator base 64 si citit raspuns
 	sprintf(sendbuf, USER_BASE64);
 	send_command(sockfd, sendbuf, "334");
 
-	// TODO: trimis parola base 64 si citit raspuns
 	sprintf(sendbuf, PASS_BASE64);
 	send_command(sockfd, sendbuf, "235");
 	
-	// TODO: trimis sursa mail si citit raspuns
 	sprintf(sendbuf, "MAIL FROM: <me@me.com>");
 	send_command(sockfd, sendbuf, "250");
 	
-	// TODO: trimis destinatie mail si citit raspuns
 	sprintf(sendbuf, "RCPT TO: <ceva@labpc.com>");
 	send_command(sockfd, sendbuf, "250");
 	
-	// TODO: trimis comanda de inceput de date si citit raspuns
 	sprintf(sendbuf, "DATA");
 	send_command(sockfd, sendbuf, "354");
 	
-	// TODO: trimis mail-ul propriu-zis si citit raspuns
 	sprintf(sendbuf, "Subject: Lab10 PC" NEWLINE
                     "From: Teo Dutu <teodor@dutu.com>" NEWLINE
                     "To: Andrei Ionescu <ceva@altceva.com>" NEWLINE
@@ -128,7 +120,7 @@ void handle_smtp() {
                     "Content-Type: multipart/mixed; boundary=rrr" NEWLINE NEWLINE
                     "--rrr" NEWLINE
                     "Content-Type: text/plain" NEWLINE NEWLINE
-                    "**** PSD mai putin generic" NEWLINE NEWLINE
+                    "muie PSD" NEWLINE NEWLINE
                     "--rrr" NEWLINE
                     "Content-Type: text/plain" NEWLINE
                     "Content-Disposition: attachment; filename=\"textfile.txt\"" NEWLINE NEWLINE
@@ -150,10 +142,10 @@ void handle_pop3(char* mail_num) {
 		exit(-1);
 	}
 
-	// TODO: completat informatii despre server-ul POP3 in variabila servaddr
 	inet_aton(SERVER_IP,&servaddr.sin_addr);
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(POP3_PORT);
+
 	// conectare la server-ul POP3
 	if (connect(sockfd, (struct sockaddr *) &servaddr, sizeof(servaddr)) < 0 ) {
 		printf("Eroare la conectare\n");
@@ -165,17 +157,15 @@ void handle_pop3(char* mail_num) {
 	DIE(n < 0, "read");
 	printf("Am primit: %s\n", recvbuf);
 
-	// TODO: trimis cerere de log in si citit raspuns
 	sprintf(sendbuf, "AUTH LOGIN");
 	send_command(sockfd, sendbuf, "+");
-	// TODO: trimis nume utilizator base 64 si citit raspuns
+
 	sprintf(sendbuf, USER_BASE64);
 	send_command(sockfd, sendbuf, "+");
 
-	// TODO: trimis parola base 64 si citit raspuns
 	sprintf(sendbuf, PASS_BASE64);
 	send_command(sockfd, sendbuf, "+OK");
-	// TODO: trimis cerere de listare a mail-urilor si citit raspuns
+
 	sprintf(sendbuf, "LIST");
 	send_command(sockfd, sendbuf, "+OK");
 	
@@ -186,6 +176,6 @@ void handle_pop3(char* mail_num) {
 }
 
 int main(int argc, char **argv) {
-	// handle_smtp();
+	handle_smtp();
 	handle_pop3(argv[1]);
 }
